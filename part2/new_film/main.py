@@ -24,14 +24,22 @@ import sqlite3
 
 con = sqlite3.connect("../netflix.db")
 cur = con.cursor()
-sqlite_query = ("")  # TODO измените код запроса
-cur.execute(sqlite_query)
-executed_query = cur.fetchall()
+sqlite_query = """
+               SELECT title
+               FROM netflix
+               WHERE release_year != ''
+               ORDER BY date_added DESC
+               LIMIT 1
+               """
+result = cur.execute(sqlite_query)
+result = executed_query = cur.fetchall()
 
 # TODO Результат запроса сохраните в переменной result
 # для последующей выдачи в требуемом формате
 
-result = ""
+movie_title = result[0][0]
+result = (f'{movie_title}')
+con.close()
 
 if __name__ == '__main__':
     print(result)
